@@ -7,14 +7,16 @@ export default function BorderWhiteButton({
   children,
 }) {
   return (
-    <View className="min-w-96  mx-auto  py-4 border-2 border-white  rounded-3xl">
+    <View className="min-w-96 flex flex-row items-center justify-center  mx-auto  py-4 border-2 border-white  rounded-3xl">
+      {children}
       <Text
-        className="text-center flex flex-row gap-2 items-center text-[16px] font-bold text-white"
+        className="text-center   font-bold text-white"
         onPress={onPress}
       >
-        {children}
+        
         {text}
       </Text>
+      
     </View>
   );
 }
