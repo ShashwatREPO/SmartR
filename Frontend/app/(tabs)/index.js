@@ -1,4 +1,4 @@
-import { View, Text, Image, ScrollView } from "react-native";
+import { View, Text, Image, ScrollView, Pressable } from "react-native";
 import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Scroll } from "lucide-react-native";
@@ -10,11 +10,11 @@ import {
   ContributionGraph,
   StackedBarChart,
 } from "react-native-chart-kit";
-import { useNavigation } from "expo-router";
-import ToolCard from "@/components/ToolCard";
+import { useNavigation, useRouter } from "expo-router";
 
-export default function index() {
+export default function Dashboard() {
   const navigaton = useNavigation();
+  const navigation = useRouter();
 
   useEffect(() => {
     navigaton.setOptions({ headerShown: false });
@@ -78,19 +78,21 @@ export default function index() {
 
       <Text className="font-bold mx-6">Tools</Text>
       <View className="flex flex-row justify-between mx-6">
+        <Pressable onPress={()=>{navigation.push("calculator")}}>
+          <View
+            className="bg-[#FF6E57] flex flex-col items-center justify-center rounded-md  "
+            style={{ width: 75, height: 75 }}
+          >
+            <Image
+              source={require("../../assets/images/Calcpng.png")}
+              resizeMode="cover"
+              onError={() => console.log("Image failed to load")}
+            />
+            <Text className="text-white">Calculator</Text>
+          </View>
+        </Pressable>
         <View
           className="bg-[#FF6E57] flex flex-col items-center justify-center rounded-md  "
-          style={{ width: 75 }}
-        >
-          <Image
-            source={require("../../assets/images/Calcpng.png")}
-            resizeMode="cover"
-            onError={() => console.log("Image failed to load")}
-          />
-          <Text className="text-white">Calculator</Text>
-        </View>
-        <View
-          className="bg-[#FF6E57] flex flex-col items-center justify-center rounded-md size-32 "
           style={{ width: 75 }}
         >
           <Image
@@ -100,7 +102,7 @@ export default function index() {
           <Text className="text-white">Chat Bot</Text>
         </View>
         <View
-          className="bg-[#FF6E57] flex flex-col items-center justify-center rounded-md size-32 "
+          className="bg-[#FF6E57] flex flex-col items-center justify-center rounded-md "
           style={{ width: 75 }}
         >
           <Image
@@ -111,7 +113,7 @@ export default function index() {
           <Text className="text-white">Reminder</Text>
         </View>
         <View
-          className="bg-[#FF6E57] flex flex-col items-center justify-center rounded-md size-32 "
+          className="bg-[#FF6E57] flex flex-col items-center justify-center rounded-md  "
           style={{ width: 75 }}
         >
           <Image

@@ -9,7 +9,7 @@ export default function Onboarding() {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push("(tabs)");
+    router.push("accountCreation");
   };
   return (
     <SafeAreaView style={{ backgroundColor: "#FF735C" }} className="flex-1 ">
