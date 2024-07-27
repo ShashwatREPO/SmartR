@@ -8,6 +8,8 @@ export default function RootLayout() {
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="accountCreation" options={{ headerShown: false }} />
       <Stack.Screen name="addressDetails" options={{ headerShown: false }} />
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="chatBot" options={{headerShown:false}} />
     </Stack>
   );
 }

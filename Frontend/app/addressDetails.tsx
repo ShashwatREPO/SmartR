@@ -98,7 +98,12 @@ export default function addressDetails() {
               >
                 <Locate size={18} color={"white"} />
               </BorderWhiteButton>
-              <WhiteButton text="Create Account" onPress={""} />
+              <WhiteButton
+                text="Create Account"
+                onPress={() => {
+                  router.push("(tabs)");
+                }}
+              />
             </View>
           </View>
         </View>
