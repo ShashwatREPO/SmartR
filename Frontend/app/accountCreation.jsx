@@ -53,12 +53,11 @@ export default function AccountCreation() {
             Already have an account ? Login
           </Text>
         </View>
-
-        <Image
-          source={require("../assets/images/Circle.png")}
-          className="absolute bottom-0"
-        />
       </KeyboardAvoidingView>
+      <Image
+        source={require("../assets/images/Circle.png")}
+        className="absolute bottom-0"
+      />
     </SafeAreaView>
   );
 }
