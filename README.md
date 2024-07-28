@@ -1,4 +1,4 @@
-# Swastimuni API: Add New User
+# SIRMS (Smart Indore Revenue Management System): Add New User
 
 ## Route Description
 
