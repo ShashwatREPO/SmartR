@@ -34,7 +34,7 @@ export default function Layout() {
           </View>
           <Pressable
             onPress={() => {
-              router.push("chatBot");
+              router.push("chatBotHyper");
             }}
           >
             <Image
