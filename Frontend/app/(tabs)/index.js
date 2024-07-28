@@ -78,7 +78,11 @@ export default function Dashboard() {
 
       <Text className="font-bold mx-6">Tools</Text>
       <View className="flex flex-row justify-between mx-6">
-        <Pressable onPress={()=>{navigation.push("calculator")}}>
+        <Pressable
+          onPress={() => {
+            navigation.push("calculator");
+          }}
+        >
           <View
             className="bg-[#FF6E57] flex flex-col items-center justify-center rounded-md  "
             style={{ width: 75, height: 75 }}
@@ -91,16 +95,18 @@ export default function Dashboard() {
             <Text className="text-white">Calculator</Text>
           </View>
         </Pressable>
-        <View
-          className="bg-[#FF6E57] flex flex-col items-center justify-center rounded-md  "
-          style={{ width: 75 }}
-        >
-          <Image
-            source={require("../../assets/images/QuickAccessChatbotIcon.png")}
-            onError={() => console.log("Image failed to load")}
-          />
-          <Text className="text-white">Chat Bot</Text>
-        </View>
+        <Pressable onPress={()=>{navigation.push("chatBotHyper")}}>
+          <View
+            className="bg-[#FF6E57] flex flex-col items-center justify-center rounded-md  "
+            style={{ width: 75 }}
+          >
+            <Image
+              source={require("../../assets/images/QuickAccessChatbotIcon.png")}
+              onError={() => console.log("Image failed to load")}
+            />
+            <Text className="text-white">Chat Bot</Text>
+          </View>
+        </Pressable>
         <View
           className="bg-[#FF6E57] flex flex-col items-center justify-center rounded-md "
           style={{ width: 75 }}

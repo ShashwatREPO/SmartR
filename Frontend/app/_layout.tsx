@@ -11,6 +11,7 @@ export default function RootLayout() {
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="chatBot" options={{ headerShown: false }} />
       <Stack.Screen name="calculator" options={{ headerShown: false }} />
+      <Stack.Screen name="chatBotHyper" options={{ headerShown: false }} />
     </Stack>
   );
 }

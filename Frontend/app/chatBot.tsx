@@ -7,9 +7,10 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ArrowLeft, SendHorizontal } from "lucide-react-native";
+import { ArrowLeft, LoaderCircle, SendHorizontal } from "lucide-react-native";
 import ChatBubble from "@/components/ChatBubble";
 import GeminieResponse from "@/components/GeminieResponse";
 import axios from "axios";
@@ -17,6 +18,7 @@ import { useRouter } from "expo-router";
 
 export default function ChatBot() {
   const [combinedChat, setCombinedChat] = useState(["hi", "hello"]);
+  const [loader, setLoader] = useState(false);
   const [message, setMessage] = useState("");
   const chatBoxRef = useRef();
 
@@ -24,25 +26,37 @@ export default function ChatBot() {
 
   const getGemniResponse = async (query) => {
     try {
-      const response = await axios.post("http://localhost:3000/chat", {
-        query,
+      const response = await axios.post("http://10.0.2.2:3000/chat", {
+        query: String(query),
       });
       return response.data.result;
     } catch (e) {
-      console.error(e);
-      return "Sorry, I couldn't process your request.";
+      console.error("API Error:", e);
+      if (e.response) {
+        console.error("Response data:", e.response.data);
+        console.error("Response status:", e.response.status);
+      } else if (e.request) {
+        console.error("No response received:", e.request);
+      } else {
+        console.error("Error setting up request:", e.message);
+      }
+      throw e;
     }
   };
 
   const handleInput = async () => {
     if (message.trim() !== "") {
-      setCombinedChat((prevState) => [...prevState, message]);
+      const sanitizedMessage = String(message).trim();
+      setCombinedChat((prevState) => [...prevState, sanitizedMessage]);
       setMessage("");
+      setLoader(true);
       try {
-        const result = await getGemniResponse(message);
+        const result = await getGemniResponse(sanitizedMessage);
         setCombinedChat((prevState) => [...prevState, result]);
       } catch (e) {
-        console.error(e);
+        Alert.alert("Error", "Failed to get response. Please try again.");
+      } finally {
+        setLoader(false);
       }
     }
   };
@@ -59,7 +73,7 @@ export default function ChatBot() {
       >
         <View style={{ flex: 1, paddingHorizontal: 32 }}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Pressable onPress={() => {navigation.back()}}>
+            <Pressable onPress={() => navigation.back()}>
               <View
                 style={{
                   width: 40,
@@ -120,12 +134,16 @@ export default function ChatBot() {
             <TextInput
               style={{ flex: 1 }}
               value={message}
-              onChangeText={setMessage}
+              onChangeText={(text) => setMessage(text)}
               placeholder="Write query"
             />
-            <Pressable onPress={handleInput}>
-              <SendHorizontal size={21} color="black" />
-            </Pressable>
+            {loader ? (
+              <LoaderCircle size={21} color="black" />
+            ) : (
+              <Pressable onPress={handleInput}>
+                <SendHorizontal size={21} color="black" />
+              </Pressable>
+            )}
           </View>
         </View>
       </KeyboardAvoidingView>
