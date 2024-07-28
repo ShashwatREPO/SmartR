@@ -29,7 +29,7 @@ export default function Layout() {
           <View className="flex flex-col">
             <Text className="text-2xl">Hello,</Text>
             <Text className="text-2xl text-[#FF735C] font-bold">
-              John Doe
+              Rakesh Sighn
             </Text>
           </View>
           <Pressable
